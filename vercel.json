@@ -1,9 +1,1 @@
-{
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "framework": "vite",
-  "nodeVersion": "18.x",
-  "env": {
-    "VITE_API_URL": "@vite_api_url"
-  }
-}
+{\n  "buildCommand": "npm run build",\n  "outputDirectory": "dist",\n  "framework": "vite",\n  "env": {\n    "VITE_API_URL": "@vite_api_url"\n  }\n}\n
