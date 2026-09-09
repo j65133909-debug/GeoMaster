@@ -1,13 +1,21 @@
 import { useCanvasStore } from '@/lib/canvasStore'
-import { Plus, Trash2, RotateCcw, Grid3x3, Move } from 'lucide-react'
-import { v4 as uuidv4 } from 'crypto-js'
+import { Plus, Trash2, RotateCcw, Grid3x3 } from 'lucide-react'
 
 function ToolPanel() {
   const { addObject, removeObject, clearCanvas, selectedId, toggleGrid, gridVisible } = useCanvasStore()
 
+  // Simple UUID v4 generator (no external dependency)
+  const generateUUID = () => {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      const r = (Math.random() * 16) | 0
+      const v = c === 'x' ? r : (r & 0x3) | 0x8
+      return v.toString(16)
+    })
+  }
+
   const addPoint = () => {
     addObject({
-      id: uuidv4(),
+      id: generateUUID(),
       type: 'point',
       properties: { x: Math.random() * 400, y: Math.random() * 400 },
       label: 'P',
@@ -17,7 +25,7 @@ function ToolPanel() {
 
   const addLine = () => {
     addObject({
-      id: uuidv4(),
+      id: generateUUID(),
       type: 'line',
       properties: {
         p1: { x: 100, y: 100 },
@@ -30,7 +38,7 @@ function ToolPanel() {
 
   const addCircle = () => {
     addObject({
-      id: uuidv4(),
+      id: generateUUID(),
       type: 'circle',
       properties: { center: { x: 200, y: 200 }, radius: 100 },
       label: 'Circle',
