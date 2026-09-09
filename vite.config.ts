@@ -8,23 +8,25 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './src'),
       '@components': path.resolve(__dirname, './src/components'),
-      '@hooks': path.resolve(__dirname, './src/hooks'),
-      '@utils': path.resolve(__dirname, './src/utils'),
-      '@types': path.resolve(__dirname, './src/types'),
+      '@pages': path.resolve(__dirname, './src/pages'),
+      '@lib': path.resolve(__dirname, './src/lib'),
+      '@data': path.resolve(__dirname, './src/data'),
+      '@api': path.resolve(__dirname, './src/api'),
     },
   },
   server: {
     port: 5173,
     open: true,
+    strictPort: false,
   },
   build: {
     outDir: 'dist',
     sourcemap: false,
+    minify: 'terser',
     rollupOptions: {
       output: {
         manualChunks: {
-          'geometry': ['src/lib/geometry'],
-          'ui': ['src/components/UI'],
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
         }
       }
     }

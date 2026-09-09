@@ -1,47 +1,26 @@
-# GeoMaster - Interactive Euclidean Geometry Learning Platform
+# GeoMaster
 
-> Master Euclidean Geometry for CAPS Mathematics Grade 10–12
+> Interactive Euclidean Geometry Learning Platform for CAPS Mathematics (Grade 10–12)
 
 GeoMaster is a polished, responsive educational web app designed to teach Euclidean Geometry to students following the South African CAPS Mathematics curriculum. It combines an interactive geometry laboratory with a personal AI mathematics tutor, prioritizing understanding, visualization, reasoning, and problem-solving over memorization.
 
 ## ✨ Features
 
-### 🔬 Interactive Geometry Lab
-- Build and explore geometric figures in real-time
-- Create points, lines, circles, and complex shapes
-- Interactive canvas with grid and snap-to-grid options
-- Real-time visualization of geometric properties
-- Measure distances, angles, and areas instantly
+- **🔬 Interactive Geometry Lab** — Drag vertices in real-time, visualize theorems (circumcircle, incircle, medians, altitudes), and explore live measurements.
+- **🤖 AI Mathematics Tutor** — Ask questions, get step-by-step solutions, Socratic guidance, and worked proofs.
+- **📚 Structured Lessons** — CAPS-aligned curriculum from Grade 10 foundations to Grade 12 riders.
+- **📱 Responsive Design** — Works on desktop, tablet, and mobile.
+- **🌙 Dark Mode** — Built-in light/dark theme toggle.
 
-### 🤖 AI Mathematics Tutor
-- Personalized explanations of geometry concepts
-- Step-by-step guidance for solving problems
-- Contextual help and clarifications
-- Learns from student questions
-- Available 24/7 for learning support
+## 🚀 Getting Started
 
-### 📚 Comprehensive Lessons
-Aligned with CAPS Mathematics curriculum:
-- **Grade 10:** Angle properties, triangles, quadrilaterals, similarity
-- **Grade 11-12:** Circle geometry, coordinate geometry, transformations, trigonometry
+### Prerequisites
+- Node.js 18+ and npm 9+
 
-### 💡 Problem Solver
-- Curated problem library (easy, medium, hard)
-- Guided problem-solving steps
-- Instant feedback and hints
-- Detailed solutions
-- Points and achievements
-
-### 📊 Progress Tracking
-- Personal learning dashboard
-- Achievement system
-- Points and milestones
-- Performance analytics
-
-## 🚀 Quick Start
+### Installation
 
 ```bash
-git clone https://github.com/j65133909-debug/GeoMaster.git
+git clone https://github.com/yourusername/GeoMaster.git
 cd GeoMaster
 npm install
 npm run dev
@@ -49,61 +28,133 @@ npm run dev
 
 Visit `http://localhost:5173`
 
+### Build for Production
+
+```bash
+npm run build
+npm run preview
+```
+
 ## 📁 Project Structure
 
 ```
 GeoMaster/
 ├── src/
-│   ├── components/      # React components
-│   ├── pages/          # Page components
-│   ├── lib/            # Libraries and utilities
-│   ├── types/          # TypeScript types
-│   └── App.tsx         # Main component
-├── index.html          # HTML template
-├── package.json        # Dependencies
-└── README.md           # This file
+│   ├── components/          # React components
+│   │   ├── geometry/        # Triangle explorer, measurements
+│   │   ├── Layout.jsx       # Main layout
+│   │   └── Navbar.jsx       # Navigation
+│   ├── pages/               # Page components
+│   │   ├── Home.jsx         # Landing
+│   │   ├── GeometryLab.jsx  # Interactive lab
+│   │   ├── Tutor.jsx        # AI tutor chat
+│   │   └── Lessons.jsx      # Lesson list & detail
+│   ├── lib/                 # Utilities
+│   │   └── geometry.js      # Math helpers
+│   ├── data/                # Content
+│   │   └── lessons.js       # CAPS curriculum
+│   ├── App.jsx              # Main app
+│   └── index.css            # Global styles
+├── base44/                  # Backend (AI tutor)
+│   └── functions/
+│       └── askTutor/        # Tutor API
+├── package.json
+├── vite.config.ts
+├── tsconfig.json
+├── tailwind.config.js
+└── README.md
 ```
 
-## 🔧 Technology Stack
+## 🛠️ Technology Stack
 
-- React 18 + TypeScript
-- Tailwind CSS
-- Vite
-- Konva.js (Canvas)
-- Zustand (State)
-- math.js (Calculations)
+- **React 18** + TypeScript
+- **Vite** — Ultra-fast build tool
+- **Tailwind CSS** — Utility-first styling
+- **React Router** — Client-side navigation
+- **Lucide Icons** — Clean SVG icons
+- **React Markdown** — Lesson content
+- **TanStack Query** — Data fetching
+- **Base44** — Backend & AI (optional)
 
-## 📚 Core Features Implemented
+## 🎓 CAPS Curriculum Coverage
 
-✅ Interactive canvas with Konva.js
-✅ 30+ geometry calculation functions
-✅ AI tutor chat interface
-✅ 6 complete lessons (CAPS aligned)
-✅ 5 guided practice problems
-✅ Progress tracking system
-✅ Responsive design (mobile, tablet, desktop)
-✅ Dark mode support
-✅ Type-safe TypeScript throughout
+### Grade 10
+- Angles and lines (revision, corresponding, alternate, co-interior)
+- Triangle properties & angle sum
+- Congruency (SSS, SAS, RHS, AAS)
+- Mid-point theorem
+- Quadrilaterals
 
-## 🎓 CAPS Mathematics Alignment
+### Grade 11
+- Circle geometry (angles at centre, angle in semicircle)
+- Cyclic quadrilaterals
+- Tangents & alternate segment theorem
+- Proportionality
 
-Grade 10-12 South African CAPS curriculum:
-- Angle properties
-- Triangle congruence & similarity
-- Quadrilateral properties
-- Circle geometry & theorems
-- Coordinate geometry
-- Transformations
-- Trigonometric applications
+### Grade 12
+- Similarity & ratio
+- Advanced riders
+- Coordinate geometry foundations
 
-## 📖 For Deployment
+## 🌐 Deployment
 
-See `DEPLOYMENT.md` for production setup
+### Vercel (Recommended)
+
+1. Push to GitHub
+2. Go to https://vercel.com/new
+3. Import the repository
+4. Vercel auto-detects Vite → Deploy
+5. Your site is live!
+
+### Netlify
+
+```bash
+npm run build
+npm install -g netlify-cli
+netlify deploy --prod --dir=dist
+```
+
+### GitHub Pages
+
+Update `vite.config.ts`:
+```js
+export default defineConfig({
+  base: '/GeoMaster/',
+  // ...
+})
+```
+
+Then:
+```bash
+npm run build
+```
+
+Push `dist/` to `gh-pages` branch.
+
+## 🔌 Environment Variables
+
+Create `.env.local`:
+```
+VITE_API_URL=https://your-backend-api.com
+VITE_AI_TUTOR_KEY=your_api_key
+```
+
+## 🤝 Contributing
+
+Contributions welcome! Please:
+1. Fork the repo
+2. Create a feature branch
+3. Commit with clear messages
+4. Open a PR
 
 ## 📄 License
 
-MIT License - see LICENSE.md
+MIT License — see LICENSE.md
+
+## 🙋 Support
+
+Questions or issues? Open a GitHub issue or contact the maintainers.
 
 ---
 
-**GeoMaster** - Making Geometry Accessible, Visual, and Engaging 🎓
+**GeoMaster** — Making Euclidean Geometry accessible, visual, and engaging. 🎓

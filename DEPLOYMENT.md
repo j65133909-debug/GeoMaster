@@ -1,77 +1,117 @@
-# GeoMaster Deployment Guide
+# Deployment Guide
 
-## Quick Deploy to Vercel (Recommended)
+## Quick Start: Vercel (Recommended)
 
-### Prerequisites
+### 1. Prerequisites
+- GitHub account with your GeoMaster repo pushed
 - Vercel account (free at vercel.com)
-- Git repository pushed to GitHub
 
-### Steps
+### 2. Deploy
+1. Go to https://vercel.com/new
+2. Select "Import Git Repository"
+3. Find and select `j65133909-debug/GeoMaster`
+4. Vercel auto-detects Vite configuration
+5. Click **Deploy**
+6. Wait ~2 minutes for build
+7. ✅ Your app is live! (URL: `geomaster-xyz.vercel.app`)
 
-1. **Install Vercel CLI**
-   ```bash
-   npm install -g vercel
-   ```
+### 3. Environment Variables (if using backend)
+In Vercel dashboard:
+- Go to **Settings → Environment Variables**
+- Add `VITE_API_URL` and `VITE_AI_TUTOR_KEY`
+- Redeploy
 
-2. **Deploy**
-   ```bash
-   vercel --prod
-   ```
+---
 
-3. **Configure**
-   - Connect GitHub repository
-   - Select framework: Next.js (or blank)
-   - Build command: `npm run build`
-   - Output directory: `dist`
-
-### Alternative: Netlify
+## Alternative: Netlify
 
 ```bash
 npm install -g netlify-cli
+npm run build
 netlify deploy --prod --dir=dist
 ```
 
-### Alternative: GitHub Pages
+---
 
+## Alternative: GitHub Pages
+
+### 1. Update vite.config.ts
+```ts
+export default defineConfig({
+  base: '/GeoMaster/',
+  // ...
+})
+```
+
+### 2. Build & Deploy
 ```bash
 npm run build
 git add dist/
 git commit -m "Deploy to GitHub Pages"
-git push
+git push origin main
 ```
 
-## Environment Setup
+### 3. Enable in GitHub Settings
+- Repo → Settings → Pages
+- Source: Deploy from a branch
+- Branch: main, folder: /dist
+- Save
 
-Create `.env.local`:
-```
-VITE_API_URL=https://api.geomaster.com
-VITE_AI_TUTOR_KEY=your_key
-```
+---
 
-## Performance Checklist
+## Performance Optimization
 
-- [ ] Enable gzip compression
-- [ ] Configure caching
-- [ ] Set up CDN
-- [ ] Monitor Core Web Vitals
-- [ ] Test on slow networks
-- [ ] Optimize bundle size
+- ✅ Gzip compression (automatic on Vercel)
+- ✅ Code splitting (configured in vite.config.ts)
+- ✅ Minification (terser)
+- ✅ CSS purging (Tailwind)
+- ✅ Image optimization (use modern formats)
 
 ## Security Checklist
 
-- [ ] Enable HTTPS
-- [ ] Configure CORS
-- [ ] Add security headers
-- [ ] Set up rate limiting
-- [ ] Implement input validation
+- ✅ HTTPS enabled (automatic)
+- ✅ Content Security Policy headers (configure in vercel.json)
+- ✅ No secrets in code (use .env.local)
+- ✅ Dependencies up-to-date (run `npm audit`)
 
 ## Monitoring
 
-- Google Analytics
-- Error tracking (Sentry)
-- Performance monitoring
-- Uptime monitoring
+### Vercel Analytics
+- Dashboard shows build times, deployment status, edge function logs
 
-## Support
+### Error Tracking (Optional)
+- Integrate Sentry or Rollbar for client-side errors
+- Add to `src/main.jsx`:
+  ```js
+  import * as Sentry from "@sentry/react";
+  Sentry.init({ dsn: "your-dsn" });
+  ```
 
-For help, open an issue on GitHub.
+---
+
+## Troubleshooting
+
+### Build fails with "dependency not found"
+- Run `npm install` locally
+- Check `package.json` for typos
+- Push changes and redeploy
+
+### Site shows blank page
+- Check browser console for errors
+- Verify `base` path in vite.config.ts matches deployment URL
+- Check Vercel logs (Deployments → Details)
+
+### Slow initial load
+- Enable Vercel Edge Caching
+- Compress images
+- Split large components with `React.lazy()`
+
+---
+
+## Next Steps
+
+1. ✅ Deploy to Vercel
+2. ✅ Set up custom domain (optional)
+3. ✅ Configure analytics
+4. ✅ Add monitoring
+5. ✅ Promote to users!
